@@ -32,6 +32,5 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter);
 // app.use('/event', tripRouter);
 
-
 // hi
 
