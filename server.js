@@ -4,6 +4,10 @@ const dotenv = require ('dotenv');
 const mongoose = require ('mongoose');
 const bodyParser = require('body-parser');
 
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const jwtAuthenticate = require('express-jwt')
+
 dotenv.config()
 mongoose.Promise = global.Promise;
 // mongoose.set('useFindAndModify', false);

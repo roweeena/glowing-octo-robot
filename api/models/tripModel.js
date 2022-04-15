@@ -21,8 +21,8 @@ const TripSchema = new mongoose.Schema({
     default:0,
   },
   items:{
-      type:Array,
-      default:[]
+      type:Object,
+      default:{}
   }
 });
 
