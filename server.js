@@ -25,7 +25,6 @@ app.use((req,res) =>{
 app.get('/', (req, res) => {
     res.send ('Hello World');
 });
-
 console.log(`Server started on http://localhost:${port}`)
 
 // hi
