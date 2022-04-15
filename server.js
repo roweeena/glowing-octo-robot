@@ -1,10 +1,10 @@
-const express = require ('express');
-const cors = require ('cors');
-const dotenv = require ('dotenv');
-const mongoose = require ('mongoose');
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const userRouter = require('.routes/userRoutes.js')
-const tripRouter = require('.routes/tripRoutes.js')
+const userRouter = require('./api/routes/userRoutes.js')
+const tripRouter = require('./api/routes/tripRoutes.js')
 
 dotenv.config()
 mongoose.Promise = global.Promise;
@@ -21,16 +21,16 @@ const app = express();
 app.listen(port);
 
 //404 page
-app.use((req,res) =>{
-    res.status(404).send({url:`${req.originalUrl} not found`})
-})
+// app.use((req,res) =>{
+//     res.status(404).send({url:`${req.originalUrl} not found`})
+// })
 app.get('/', (req, res) => {
     res.send ('Hello World');
 });
 // console.log(`Server started on http://localhost:${port}`)
 
 app.use('/user', userRouter);
-app.use('/event', tripRouter);
+// app.use('/event', tripRouter);
 
 
 // hi

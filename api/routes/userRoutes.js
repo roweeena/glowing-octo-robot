@@ -1,14 +1,17 @@
 //TODO: route and export user routes from controller 
 
-import * as controller from '../controllers/user.js';
-import express from 'express';
-import { userAuth } from '../middleware/userAuth.js';
+const userController = require('../controllers/userController.js');
+const express = require('express');
+const userAuth = require('../middleware/userAuth.js');
+const checkAuth = userAuth.checkAuth
 
 const router = express.Router();
 
-router.get('/in', userAuth, controller.in); // need to rename this <-- auth user
-router.get('/:id', controller.getUser); // <-- getting user info
-router.get('/trips', controller.trips); // <-- getting all trips
-router.post('/signup', controller.signup); 
-router.post('/login', controller.login);
-router.post('/createTrip', controller.createTrip);
+// router.get('/userIn', checkAuth, userController.userIn); // need to rename this <-- auth user
+// router.get('/:id', userController.getUser); // <-- getting user info
+router.get('/trips', userController.trips); // <-- getting all trips
+// router.post('/signup', userController.signup); 
+// router.post('/login', userController.login);
+// router.post('/createTrip', userController.createTrip);
+
+module.exports = router
