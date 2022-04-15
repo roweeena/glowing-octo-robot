@@ -1,26 +1,29 @@
-// const jwt = require('jsonwebtoken')
-// const userInfo = require('../models/userModel.js');
+const jwt = require('jsonwebtoken')
+const userInfo = require('../models/userModel.js');
 
-// export const checkAuth = async (req, res, next) => {
-//   let token;
-//   const header = req.get('Authorization');
+module.exports = {
 
-//   if(header && header.startsWith('Bearer' + ' ')) {
-//     token = header.split(' ')[1];
-//   }
+  async checkAuth (req, res, next){
+    let token;
+    const header = req.get('Authorization');
 
-//   if(!token) return res.status(401).json({ message: 'Authentication error' });
+    if(header && header.startsWith('Bearer' + ' ')) {
+      token = header.split(' ')[1];
+    }
 
-//   jwt.verify(token, process.env.jwt.token, async (err, decoded) => { // need jwt secret token in env
+    if(!token) return res.status(401).json({ message: 'Authentication error' });
 
-//     if(err) return res.status(401).json({ message: 'Authentication error' });
+    jwt.verify(token, process.env.TOKEN, async (err, decoded) => { // need jwt secret token in env
 
-//     const user = await UserData.findOne({_id: decoded._id});
+      if(err) return res.status(401).json({ message: 'Authentication error' });
 
-//     if(!user) return res.status(401).json({ message: 'Authentication error' });
-    
-//     req.userID = user._id;
+      const user = await UserData.findOne({_id: decoded._id});
 
-//     // next();
-//   });
-// }
+      if(!user) return res.status(401).json({ message: 'Authentication error' });
+      
+      req.userID = user._id;
+
+      // next();
+    });
+  }
+}

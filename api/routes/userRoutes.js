@@ -7,7 +7,7 @@ const checkAuth = userAuth.checkAuth
 
 const router = express.Router();
 
-// router.get('/userIn', checkAuth, userController.userIn); // need to rename this <-- auth user
+router.get('/userIn', checkAuth, userController.userIn); // need to rename this <-- auth user
 // router.get('/:id', userController.getUser); // <-- getting user info
 router.get('/trips', userController.trips); // <-- getting all trips
 // router.post('/signup', userController.signup); 

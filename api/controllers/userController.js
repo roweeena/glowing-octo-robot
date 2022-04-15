@@ -2,9 +2,13 @@
 
 module.exports = {
 
+    async userIn(req,res){
+        const message = 'hello'
+        return res.status(200).json(message) 
+    },
+
     async trips(req, res){
         const message = 'hello'
-        // console.log(req)
         return res.status(200).json(message)
     }
 }
