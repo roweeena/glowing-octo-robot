@@ -11,15 +11,20 @@ module.exports = {
       token = header.split(' ')[1];
     }
 
-    if(!token) return res.status(401).json({ message: 'Authentication error' });
+    if(!token){
+      return res.status(401).json({ message: 'Authentication error' });
+    } 
 
     jwt.verify(token, process.env.TOKEN, async (err, decoded) => { // need jwt secret token in env
-
-      if(err) return res.status(401).json({ message: 'Authentication error' });
-
+      if(err){
+        return res.status(401).json({ message: 'Authentication error' });
+      } 
+     
       const user = await UserData.findOne({_id: decoded._id});
-
-      if(!user) return res.status(401).json({ message: 'Authentication error' });
+      
+      if(!user){
+        return res.status(401).json({ message: 'Authentication error' });
+      } 
       
       req.userID = user._id;
 
