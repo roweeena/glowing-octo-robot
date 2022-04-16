@@ -24,13 +24,14 @@ app.listen(port);
 // app.use((req,res) =>{
 //     res.status(404).send({url:`${req.originalUrl} not found`})
 // })
+
 app.get('/', (req, res) => {
     res.send ('Hello World');
 });
 // console.log(`Server started on http://localhost:${port}`)
 
 app.use('/user', userRouter);
-// app.use('/event', tripRouter);
+app.use('/trip', tripRouter)
 
-// hi
 
+// hellooooo
