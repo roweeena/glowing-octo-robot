@@ -6,11 +6,10 @@ const userInfo = require('../models/userModel.js');
 const userToken = (id) => {
   return jwt.sign(
     {_id: id},
-    config.jwt.secretKey,
-    { expiresIn: config.jwt.expiresInSec },
+    process.env.TOKEN,
+    { expiresIn: '72h' },
   )
 }
-
 
 module.exports = {
 
