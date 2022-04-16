@@ -1,7 +1,7 @@
 //TODO: add user CRUD actions e.g. creating a trip => login/signup authentication again hahahahaha
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const userInfo = require('../models/userModel.js');
+const userInfo = require('../models/userModel.js');a
 
 const createJWT = (id) => {
   return jwt.sign(
