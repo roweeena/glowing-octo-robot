@@ -1,12 +1,6 @@
 import mongoose from 'mongoose';
 
 const TripSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true
-  },
   location: {
     type: String,
     required: true,
@@ -20,8 +14,9 @@ const TripSchema = new mongoose.Schema({
     type:Number,
     default:0,
   },
-  items:{
+  expense:{
       type:Object,
+      ref: "Expense",
       default:{}
   }
 });
