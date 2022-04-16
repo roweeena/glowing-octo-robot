@@ -46,6 +46,27 @@ module.exports = {
         _id:user._id,
         token
       })
+    },
+
+    async signup(req, res){
+      const { email, password } = req.body
+      const inUse = await userInfo.findOne({email});
+      if (inUse){
+        return res.status(401).json({response:'email already in use'});
+      }
+      const bcryptPass = bcrypt.hashSync(password, 17)
+      const createUser = await userInfo.create({ // CREATE USER
+        email: email, // can just be 'email' but looks a little confusing
+        password: encryptedPassword
+      })
+      if (!createUser){
+        return res.status(404).json({response: `Error: can't create user`})
+      }
+      const token = userToken(createUser.id)
+      return res.status(200).json({ // login user
+        _id:createUser._id,
+        token
+      })
     }
 
 }

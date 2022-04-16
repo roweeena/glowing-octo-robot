@@ -11,7 +11,7 @@ router.get('/userIn', checkAuth, userController.userIn); // need to rename this 
 router.get('/trips', userController.trips); // <-- getting all trips
 router.get('/:id', userController.getUser); // <-- getting user info
 router.post('/login', userController.login);
-// router.post('/signup', userController.signup); 
+router.post('/signup', userController.signup); 
 // router.post('/createTrip', userController.createTrip);
 
 module.exports = router

@@ -4,16 +4,17 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        default: "user"
+        default: "unnamed"
     },
     email: {
         type: String,
         trim: true,
         required: true
     },
-    passwordDigest: {
+    password: {
         type: String,
         trim: true,
+        required:true
     },
     createdAt:{
         type:Date,
