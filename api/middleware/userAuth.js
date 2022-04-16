@@ -12,7 +12,7 @@ module.exports = {
     }
 
     if(!token){
-      return res.status(401).json({ message: 'Authentication error' });
+      return res.status(401).json({ message: 'Authentication error: missing token' });
     } 
 
     jwt.verify(token, process.env.TOKEN, async (err, decoded) => { // need jwt secret token in env
@@ -28,7 +28,7 @@ module.exports = {
       
       req.userID = user._id;
 
-      // next();
+      next();
     });
   }
 }

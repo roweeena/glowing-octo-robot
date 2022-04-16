@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userInfo = require('../models/userModel.js');
 
-const createJWT = (id) => {
+const userToken = (id) => {
   return jwt.sign(
     {_id: id},
     config.jwt.secretKey,
@@ -19,15 +19,33 @@ module.exports = {
         return res.status(200).json(message) 
     },
 
+    async trips(req, res){
+      let call = undefined
+      const trips = call || 'there are no trips'
+      return res.status(200).json(trips)
+    },
+
     async getUser(req,res){
       let call = undefined
       const users = call || 'there are no users'
       return res.status(200).json(users)
     },
 
-    async trips(req, res){
-      let call = undefined
-      const trips = call || 'there are no trips'
-      return res.status(200).json(trips)
+    async login(req, res){
+      const { email, password } = req.body
+      const user = await UserData.findOne({email})
+      if (!user){ // incorrect credentials - email
+        return res.status(401).json({response: 'Sorry, invalid username or password'})
+      }
+      const matched = await bcrypt.compare(password, user.password); // incorrect credentials - password
+      if (!matched){
+        return res.status(401).json({response: 'Sorry, invalid username or password'})
+      }
+      const token = userToken(user._id);
+      return res.status(200).json({
+        _id:user._id,
+        token
+      })
     }
+
 }
