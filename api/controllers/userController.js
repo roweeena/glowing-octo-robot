@@ -20,7 +20,9 @@ module.exports = {
     },
 
     async getUser(req,res){
-
+      let call = undefined
+      const users = call || 'there are no users'
+      return res.status(200).json(users)
     },
 
     async trips(req, res){
