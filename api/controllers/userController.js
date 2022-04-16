@@ -14,24 +14,25 @@ const userToken = (id) => {
 
 module.exports = {
 
-    async userIn(req,res){
+    async userIn(req,res){ // check login
         const message = 'user in'
         return res.status(200).json(message) 
     },
 
-    async trips(req, res){
+    async trips(req, res){ // get trip info
       let call = undefined
       const trips = call || 'there are no trips'
       return res.status(200).json(trips)
     },
 
-    async getUser(req,res){
-      let call = undefined
-      const users = call || 'there are no users'
-      return res.status(200).json(users)
+    async getUser(req, res){ // grab info for user
+      const userId = req.params.id;
+      const currentUser = await userInfo.findOne({_id: userId})
+        .populate("trips")
+      return res.status(200).json(currentUser);
     },
 
-    async login(req, res){
+    async login(req, res){ // login user
       const { email, password } = req.body
       const user = await UserData.findOne({email})
       if (!user){ // incorrect credentials - email
@@ -48,7 +49,7 @@ module.exports = {
       })
     },
 
-    async signup(req, res){
+    async signup(req, res){ // signup user
       const { email, password } = req.body
       const inUse = await userInfo.findOne({email});
       if (inUse){
