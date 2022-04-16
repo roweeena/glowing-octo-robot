@@ -24,7 +24,8 @@ module.exports = {
     },
 
     async trips(req, res){
-        const message = 'hello'
-        return res.status(200).json(message)
+      let call = undefined
+      const trips = call || 'there are no trips'
+      return res.status(200).json(trips)
     }
 }
