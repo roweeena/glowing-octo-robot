@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const ExpenseSchema = new mongoose.Schema({
+  
   name: {
     type: String,
     required: true,
@@ -13,8 +14,12 @@ const ExpenseSchema = new mongoose.Schema({
   category:{
       type:String,
       required:true
+  },
+  color:{
+    type:String,
+    required:true
   }
-  
+
 });
 
 export default mongoose.model("Expense", ExpenseSchema);
