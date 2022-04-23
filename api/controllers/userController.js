@@ -26,32 +26,39 @@ module.exports = {
 
     async getUser(req, res){ // grab info for user
       const userId = req.params.id;
-      const currentUser = await userInfo.findOne({_id: userId})
+      const currentUser = await userInfo.findOne({id: userId})
         .populate("trips")
       return res.status(200).json(currentUser);
     },
 
     async login(req, res){ // login user
+      console.log('login controller called')
       const { email, password } = req.body
-      const user = await UserData.findOne({email})
+      const user = await userInfo.findOne({email})
       if (!user){ // incorrect credentials - email
+        console.log('Sorry, invalid username or password')
         return res.status(401).json({response: 'Sorry, invalid username or password'})
       }
       const matched = await bcrypt.compare(password, user.password); // incorrect credentials - password
       if (!matched){
+        console.log('Sorry, invalid username or password')
         return res.status(401).json({response: 'Sorry, invalid username or password'})
       }
-      const token = userToken(user._id);
+      const token = userToken(user.id);
       return res.status(200).json({
-        _id:user._id,
+        id:user.id,
         token
       })
     },
 
     async signup(req, res){ // signup user
       const { email, password } = req.body
+      console.log("SIGNUP IS BEING CALLED IN BACKEND")
+      const encryptedPassword = bcrypt.hashSync(password, 10);
+      // console.log('reaching token')
       const inUse = await userInfo.findOne({email});
       if (inUse){
+        console.log('email already in use')
         return res.status(401).json({response:'email already in use'});
       }
       const bcryptPass = bcrypt.hashSync(password, 17)
@@ -60,11 +67,12 @@ module.exports = {
         password: encryptedPassword
       })
       if (!createUser){
+        console.log(`can't create user`)
         return res.status(404).json({response: `Error: can't create user`})
       }
       const token = userToken(createUser.id)
       return res.status(200).json({ // login user
-        _id:createUser._id,
+        id:createUser.id,
         token
       })
     }

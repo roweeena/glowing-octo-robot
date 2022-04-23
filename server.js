@@ -20,6 +20,10 @@ const app = express();
 
 app.listen(port);
 
+app.use(cors());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 //404 page
 // app.use((req,res) =>{
 //     res.status(404).send({url:`${req.originalUrl} not found`})
@@ -28,7 +32,7 @@ app.listen(port);
 app.get('/', (req, res) => {
     res.send ('Hello World');
 });
-// console.log(`Server started on http://localhost:${port}`)
+console.log(`Server started on http://localhost:${port}`)
 
 app.use('/user', userRouter);
 app.use('/trip', tripRouter)
