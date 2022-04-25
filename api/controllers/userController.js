@@ -26,7 +26,7 @@ module.exports = {
 
     async getUser(req, res){ // grab info for user
       const userId = req.params.id;
-      const currentUser = await userInfo.findOne({email: userId})
+      const currentUser = await userInfo.findOne({id: userId})
         // .populate("trips")
       return res.status(200).json(currentUser);
     },
