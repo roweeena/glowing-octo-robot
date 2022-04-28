@@ -23,7 +23,7 @@ module.exports = {
       userId = req.body.id
       const currentUser = await userInfo.findOne({_id: userId})
       currentUser.name = req.body.newName
-      currentUser.update()
+      await currentUser.save()
       const updatedUser = await userInfo.findOne({_id: userId})
       console.log('update user', updatedUser)
       return res.status(200).json(updatedUser);
