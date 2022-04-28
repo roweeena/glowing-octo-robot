@@ -12,6 +12,7 @@ router.get('/trips', userController.trips); // <-- getting all trips
 router.get('/:id', userController.getUser); // <-- getting user info
 router.post('/login', userController.login);
 router.post('/signup', userController.signup); 
+router.post('/edit', userController.edit); 
 // router.post('/createTrip', userController.createTrip);
 
 module.exports = router

@@ -18,6 +18,17 @@ module.exports = {
         return res.status(200).json(message) 
     },
 
+    async edit(req, res){
+      console.log('user edit controller called', req.body)
+      userId = req.body.id
+      const currentUser = await userInfo.findOne({_id: userId})
+      currentUser.name = req.body.newName
+      currentUser.update()
+      const updatedUser = await userInfo.findOne({_id: userId})
+      console.log('update user', updatedUser)
+      return res.status(200).json(updatedUser);
+    },
+
     async trips(req, res){ // get trip info
       let call = undefined
       const trips = call || 'there are no trips'
@@ -47,6 +58,7 @@ module.exports = {
       const token = userToken(user.id);
       return res.status(200).json({
         id:user.id,
+        name: user.name,
         token
       })
     },
